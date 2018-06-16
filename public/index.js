@@ -15,12 +15,11 @@ const requestComplete = function(){
    if(this.status !== 200) return;
    const countries = JSON.parse(this.response);
    console.log(this);
-   populateList(countries);
-
+   populateFlagList(countries);
+   populateDropdown(countries);
 
 }
-
-const populateList = function(countries){
+const populateFlagList = function(countries){
    const ul = document.querySelector('#country-list');
    countries.forEach(function(country){
      const button = document.createElement('button');
@@ -32,19 +31,74 @@ const populateList = function(countries){
      ul.appendChild(button);
      button.appendChild(img);
      button.addEventListener('click', function(){
-       handlebuttonclick(country)
+       handlebuttonclick(country, countries)
      });
    });
-
    const mapDiv = document.getElementById("main-map");
    const glasgow = [55.854979, -4.243281];
    const zoomLevel = 6;
    mainMap = new MapWrapper(mapDiv, glasgow, zoomLevel);
 }
 
-const handlebuttonclick = function(country){
-  const newLocation = country.latlng;
-  const name = country.name;
-  mainMap.moveTo(newLocation, name)
+const handlebuttonclick = function(country, countries){
+  //button brings up a bigger picture of flag
+  //with an input for a guess the country
+  const clues = document.querySelector("#guess-pannel");
+  //clears the previous flag clues
+  clues.innerHTML = "";
+  //shows bigger picture of flag
+  const flag = document.createElement('img');
+  flag.src = country.flag;
+  flag.height = 50;
+  flag.padding = 15;
+  flag.alt = country.name;
+  clues.appendChild(flag);
+  //shows clues list
+  const cluesList = document.createElement('ul');
+  const capital = document.createElement('li');
+  const population = document.createElement('li');
+  const region = document.createElement('li');
+  capital.textContent = "Capital: " + country.capital;
+  population.textContent = "Population: " + country.population;
+  region.textContent = "Region: " + country.region;
+  clues.appendChild(cluesList);
+  cluesList.appendChild(capital);
+  cluesList.appendChild(population);
+  cluesList.appendChild(region);
+
+  //creates an input box for the user to guess which country they think it is.
+  const guess = document.querySelector('#guess');
+  guess.addEventListener('change', function(){
+    var submittedAnswer = countries[guess.value];
+    handleSubmit(country, submittedAnswer);
+  });
 }
+correctGuesses = 0;
+const handleSubmit = function(country, submittedAnswer){
+  if (submittedAnswer === country){
+    //move map and tag it
+    const newLocation = country.latlng;
+    const name = country.name;
+    mainMap.moveTo(newLocation, name);
+    //increment counter
+    const score = document.querySelector("#counter");
+    correctGuesses++;
+    score.textContent = `You have made ${correctGuesses} correct guesses`
+  } else if (submittedAnswer !== country) {
+    console.log("wrongAnswer");
+
+  }
+
+}
+
+const populateDropdown = function(countries){
+  const dropdown = document.querySelector('#guess');
+  countries.forEach(function(country){
+    const option = document.createElement('option');
+    option.value = countries.indexOf(country);
+    option.textContent = country.name;
+    dropdown.appendChild(option);
+  });
+}
+
 window.addEventListener('load', app);
