@@ -70,11 +70,12 @@ const handlebuttonclick = function(country, countries){
   const guess = document.querySelector('#guess');
   guess.addEventListener('change', function(){
     var submittedAnswer = countries[guess.value];
-    handleSubmit(country, submittedAnswer);
+    handleSubmit(country, submittedAnswer, countries);
   });
 }
 correctGuesses = 0;
-const handleSubmit = function(country, submittedAnswer){
+wrongGuesses = 0;
+const handleSubmit = function(country, submittedAnswer, countries){
   if (submittedAnswer === country){
     //move map and tag it
     const newLocation = country.latlng;
@@ -83,10 +84,12 @@ const handleSubmit = function(country, submittedAnswer){
     //increment counter
     const score = document.querySelector("#counter");
     correctGuesses++;
-    score.textContent = `You have made ${correctGuesses} correct guesses`
+    let totalCountries = countries.length
+    score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
   } else if (submittedAnswer !== country) {
-    console.log("wrongAnswer");
-
+    wrongGuesses++;
+    const incorrect = document.querySelector("#wrong-guesses");
+    incorrect.textContent = `${wrongGuesses} wrong answers`
   }
 }
 
