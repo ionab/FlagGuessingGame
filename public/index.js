@@ -25,8 +25,7 @@ const populateFlagList = function(countries){
      const button = document.createElement('button');
      const img = document.createElement("img");
      img.src = country.flag;
-     img.height = 15;
-     img.padding = 15;
+     img.height = 40;
      img.alt = country.name;
      ul.appendChild(button);
      button.appendChild(img);
@@ -49,7 +48,7 @@ const handlebuttonclick = function(country, countries){
   //shows bigger picture of flag
   const flag = document.createElement('img');
   flag.src = country.flag;
-  flag.height = 50;
+  flag.height = 100;
   flag.padding = 15;
   flag.alt = country.name;
   clues.appendChild(flag);
