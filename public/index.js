@@ -88,7 +88,6 @@ const handleSubmit = function(country, submittedAnswer){
     console.log("wrongAnswer");
 
   }
-
 }
 
 const populateDropdown = function(countries){
