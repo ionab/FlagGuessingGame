@@ -7,14 +7,14 @@ const MapWrapper = function(element, coords, zoom){
       .setView(coords, zoom);
     //add marker on click
     this.map.on("click", function(event){
-      this.flyTo(event.latlng);
+      this.map.flyTo(event.latlng);
     }.bind(this));
 }
 
 //writes move to function which takes in a co-ord
 MapWrapper.prototype.moveTo = function(place, name, flag){
     this.map.flyTo(place, 6);
-    L.marker(place).addTo(this.map).bindPopup(name).openPopup()
+    L.marker(place).addTo(this.map).bindPopup(flag, name).openPopup()
     //adds in a pop up with hyperlink to the wiki page
 }
 

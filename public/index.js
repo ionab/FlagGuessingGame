@@ -25,7 +25,7 @@ const populateFlagList = function(countries){
      const button = document.createElement('button');
      const img = document.createElement("img");
      img.src = country.flag;
-     img.height = 40;
+     img.height = 60;
      img.alt = country.name;
      ul.appendChild(button);
      button.appendChild(img);
@@ -78,8 +78,11 @@ const handleSubmit = function(country, submittedAnswer, countries){
   if (submittedAnswer === country){
     //move map and tag it
     const newLocation = country.latlng;
+    const img = document.createElement("img");
+    img.src = country.flag;
+    img.height = 60;
     const name = country.name;
-    mainMap.moveTo(newLocation, name);
+    mainMap.moveTo(newLocation, name, img);
     //increment counter
     const score = document.querySelector("#counter");
     correctGuesses++;
@@ -87,8 +90,8 @@ const handleSubmit = function(country, submittedAnswer, countries){
     score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
   } else if (submittedAnswer !== country) {
     wrongGuesses++;
-    const incorrect = document.querySelector("#wrong-guesses");
-    incorrect.textContent = `${wrongGuesses} wrong answers`;
+    // const incorrect = document.querySelector("#wrong-guesses");
+    // incorrect.textContent = `${wrongGuesses} wrong answers`;
   }
 }
 
