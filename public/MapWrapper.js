@@ -7,7 +7,7 @@ const MapWrapper = function(element, coords, zoom){
       .setView(coords, zoom);
     //add marker on click
     this.map.on("click", function(event){
-      this.addMarker(event.latlng);
+      this.flyTo(event.latlng);
     }.bind(this));
 }
 
@@ -23,8 +23,8 @@ MapWrapper.prototype.currentLocation = function () {
   this.map.locate({setView: true})
 };
 
-//function for adding a marker
-MapWrapper.prototype.addMarker = function (coords) {
-  L.marker(coords).addTo(this.map);
-
-};
+// function for adding a marker
+// MapWrapper.prototype.addMarker = function (coords) {
+//   L.marker(coords).addTo(this.map);
+//
+// };

@@ -89,7 +89,7 @@ const handleSubmit = function(country, submittedAnswer, countries){
   } else if (submittedAnswer !== country) {
     wrongGuesses++;
     const incorrect = document.querySelector("#wrong-guesses");
-    incorrect.textContent = `${wrongGuesses} wrong answers`
+    incorrect.textContent = `${wrongGuesses} wrong answers`;
   }
 }
 
