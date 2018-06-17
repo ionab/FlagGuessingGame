@@ -6,8 +6,8 @@ const MapWrapper = function(element, coords, zoom){
       .addLayer(osmLayer)
       .setView(coords, zoom);
     //add marker on click
-    this.map.on("click", function(event){
-      this.addMarker(event.latlng);
+    // this.map.on("click", function(event){
+    //   this.addMarker(event.latlng);
     }.bind(this));
 }
 
