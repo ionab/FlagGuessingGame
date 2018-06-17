@@ -87,7 +87,7 @@ const handleSubmit = function(country, submittedAnswer, countries){
     const score = document.querySelector("#counter");
     correctGuesses++;
     let totalCountries = countries.length
-    score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
+    // score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
   } else if (submittedAnswer !== country) {
     wrongGuesses++;
     // const incorrect = document.querySelector("#wrong-guesses");
