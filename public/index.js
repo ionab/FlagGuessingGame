@@ -17,7 +17,12 @@ const requestComplete = function(){
    console.log(this);
    populateFlagList(countries);
    populateDropdown(countries);
-
+   //creates an input box for the user to guess which country they think it is.
+   const guess = document.querySelector('#guess');
+   guess.addEventListener('change', function(){
+     var submittedAnswer = countries[this.value];
+     handleSubmit(selectedCountry, submittedAnswer, countries);
+   });
 }
 const populateFlagList = function(countries){
    const ul = document.querySelector('#country-list');
@@ -33,6 +38,7 @@ const populateFlagList = function(countries){
        handlebuttonclick(country, countries)
      });
    });
+
    const mapDiv = document.getElementById("main-map");
    const glasgow = [55.854979, -4.243281];
    const zoomLevel = 6;
@@ -64,16 +70,12 @@ const handlebuttonclick = function(country, countries){
   cluesList.appendChild(capital);
   cluesList.appendChild(population);
   cluesList.appendChild(region);
+  selectedCountry = country;
 
-  //creates an input box for the user to guess which country they think it is.
-  const guess = document.querySelector('#guess');
-  guess.addEventListener('change', function(){
-    var submittedAnswer = countries[guess.value];
-    handleSubmit(country, submittedAnswer, countries);
-  });
 }
 correctGuesses = 0;
 wrongGuesses = 0;
+selectedCountry = null;
 const handleSubmit = function(country, submittedAnswer, countries){
   if (submittedAnswer === country){
     //move map and tag it
@@ -87,11 +89,11 @@ const handleSubmit = function(country, submittedAnswer, countries){
     const score = document.querySelector("#counter");
     correctGuesses++;
     let totalCountries = countries.length
-    // score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
+    score.textContent = `You have ${correctGuesses} of ${totalCountries} correct.`
   } else if (submittedAnswer !== country) {
     wrongGuesses++;
-    // const incorrect = document.querySelector("#wrong-guesses");
-    // incorrect.textContent = `${wrongGuesses} wrong answers`;
+    const incorrect = document.querySelector("#wrong-guesses");
+    incorrect.textContent = `${wrongGuesses} wrong answers`;
   }
 }
 
