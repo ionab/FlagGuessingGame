@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://www.noupe.com/wp-content/uploads/2009/10/pattern-07.jpg");
+  background-image: url("https://d1yn1kh78jj1rr.cloudfront.net/image/thumbnail/rDtN98Qoishumwih/hotairballoonpaper-08-091815-602_thumb.jpg");
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -10,6 +10,7 @@ body {
   position: relative;
   display: inline-block;
   float: right;
+  padding-right: 30px;
 }
 
 h1,h2, h3, p {
